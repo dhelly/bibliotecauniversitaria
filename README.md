@@ -29,3 +29,4 @@ Permite o download automatizado das páginas da biblioteca universtária.
 3. Arraste o script para o firefox e selecione a opção instalar 
 4. Só acessar a biblioteca universitária, escolher o livro e clicar em CAPTURAR.
 
+[greasemonkey]: https://addons.mozilla.org/nl/firefox/addon/greasemonkey/
