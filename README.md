@@ -17,6 +17,10 @@ Permite o download automatizado das páginas da biblioteca universtária.
 - Por gerar um zip é aconselhável baixar apenas 100 a 200 páginas por vez.
 - Não funciona com Tampermonkey, só Firefox.
 
+## Pre-requisitos ##
+1. Mozilla Firefox
+2. Complemento GreaseMonkey
+
 ## Instalação ##
 
 ### Greasemonkey ###
