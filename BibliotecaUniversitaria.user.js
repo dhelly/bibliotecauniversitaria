@@ -2,10 +2,10 @@
 // @name        BibliotecaUniversitaria
 // @namespace   inutil
 // @include     http://cruzeirodosul.bv3.digitalpages.com.br/users/publications/*
-// @version     1
+// @version     2
 // @require     https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.min.js
-// @require     https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js
-// @require     https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js
+// @require     https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
+// @require     https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js
 // @grant       GM_xmlhttpRequest
 // ==/UserScript==
 
@@ -85,7 +85,7 @@ var html = '<div id="savePNG">' +
 $('body').prepend(html);
 
 
-var zipname;
+var zipname = "";
 var zip = new JSZip();
 
 $('#savePNG button').click(function(){
@@ -104,20 +104,25 @@ function addIMG(url, name) {
     url: url,
     overrideMimeType: 'image/jpg; charset=x-user-defined',
     onreadystatechange: function(res) {
-      // alert("Request state changed to: " + res.readyState);
+      //console.log("Request state changed to: " + res.readyState);
   },
     onload: function (response) {
       zip.file(filename, response.responseText, {
         binary: true
       });
+        console.log(response.Text);
     }
   });
 }
 
 function saveZip(nameFile) {
-  zipname = nameFile + '.zip';
-  var blob = zip.generate({type: "blob"});
-  saveAs(blob, zipname);
+    zipname = nameFile + '.zip';
+
+    zip.generateAsync({type:"blob"})
+        .then(function(content) {
+        // see FileSaver.js
+        saveAs(content, zipname);
+    });
 }
 
 function proximaPag(){
@@ -129,6 +134,8 @@ function pegaPag(){
 	if($(".backgroundImg")[0] !== undefined){
         url = $(".backgroundImg")[0].src;
         id = $(".backgroundImg")[0].src.split('/')[10].substring(16,23);
+        console.log(url);
+        console.log(id);
         addIMG(url, id);
         cont++;
     }
@@ -145,9 +152,8 @@ function pegaPag(){
 	
 function salvar(){
 	var i = 0;
-	//var totPage = $('ul.list_box li').length;
-  var totPage = 100;
-	var download = window.location.href.split('/')[5];
+    var totPage = 100;
+    var download = window.location.href.split('/')[5];
 
   if($('#limite').val().length != 0){
     totPage = $('#limite').val();
@@ -164,9 +170,9 @@ function salvar(){
 		
 		if(i > totPage){
 			clearInterval(time);
-			alert('Download do arquivo');
-			saveZip(download+"-"+totPage);
-			return false;
+			console.log('Download do arquivo');
+            nameBook = $('.editionName')[0].attributes[1].textContent;
+            saveZip(nameBook+"-"+totPage);
 		}
 
 		$.ajax({
