@@ -1,6 +1,5 @@
+# DEPRECATED
 # Script Inútil para captura de páginas da Biblioteca universitária #
-
-DEPRECATED
 
 ## Propósito ##
 
