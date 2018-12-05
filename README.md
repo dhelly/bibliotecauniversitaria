@@ -1,6 +1,6 @@
 # Script Inútil para captura de páginas da Biblioteca universitária #
 
-[![forthebadge](http://forthebadge.com/images/badges/fuck-it-ship-it.svg)](http://forthebadge.com)
+DEPRECATED
 
 ## Propósito ##
 
